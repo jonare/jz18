@@ -45,14 +45,183 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 <code>&lt;html&gt;
 &lt;head&gt;
 &lt;meta http-equiv="Content-Security-Policy" content="..."&gt;
-&lt;meta http-equiv="Content-Security-Policy-Report-Only" content="..."&gt;</code></pre>
+&lt;meta http-equiv="Content-Security-Policy-Report-Only"
+ content="..."&gt;</code></pre>
 			</section>
 
 			<section>
-				<pre><code data-noescape>Content-Security-Policy: <i>directive</i>; <i>directive</i>; <i>directive</i>;</code></pre>
-				<pre class="fragment"><code data-noescape>Content-Security-Policy: default-src: 'self'; report-uri /log/csp </code></pre>
-
+<pre><code data-noescape class="hljs csp">Content-Security-Policy: <i>directive</i>; <i>directive</i>; <i>directive</i></code></pre>
 			</section>
+
+			<section>
+				<pre><code data-noescape class="hljs csp">Content-Security-Policy: default-src 'self';
+                         report-uri /log/csp</code></pre>
+				<aside class="notes">
+					Nyttig CSP i sin aller enkleste form
+					Ikke så realistisk
+					Forklar directivene
+						default-src
+						'self'
+						report-uri
+							Superfin JSON POST
+					I det virkelige liv også litt vanskelig
+					default-src er sekkeposten, der vi ikke har spesifisert directivet
+					CSP-rapportene inkluderer hvilket directive som ble brutt, og "default-src" gir ingen hjelp
+				</aside>
+			</section>
+
+			<section>
+				<pre><code data-noescape class="hljs csp">Content-Security-Policy: default-src 'self';
+                         script-src js.sparebank1.no;
+                         style-src 'self';
+                         img-src 'self' www.facebook.com;
+                         object-src 'none';
+                         report-uri /log/csp</code></pre>
+				<aside class="notes">
+					Noen viktige og vanlige directives
+					Gå fort gjennom
+					(Mangel på) arv
+				</aside>
+			</section>
+
+			<section>
+				<h2>Directives</h2>
+				<ul style="font-size: small">
+					<li>base-uri</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">block-all-mixed-content</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">child-src</li>
+					<li>connect-src</li>
+					<li>default-src</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">disown-opener</li>
+					<li>font-src</li>
+					<li>form-action</li>
+					<li>frame-ancestors</li>
+					<li>frame-src</li>
+					<li>img-src</li>
+					<li>manifest-src</li>
+					<li>media-src</li>
+					<li>object-src</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">plugin-types</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">referrer</li>
+					<li>report-uri</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">report-to</li>
+					<li>require-sri-for</li>
+					<li class="fragment semi-fade-out" data-fragment-index="1">sandbox</li>
+					<li class="fragment grow" data-fragment-index="2">script-src</li>
+					<li>style-src</li>
+					<li>upgrade-insecure-requests</li>
+					<li>worker-src</li>
+				</ul>
+			</section>
+
+			<section>
+				<h2>Directives</h2>
+				<table style="font-size: medium">
+					<thead>
+					<tr>
+						<th>Fetch</th>
+						<th>Document</th>
+						<th>Navigation</th>
+						<th>Reporting</th>
+						<th>Other</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>child-src</td>
+						<td>base-uri</td>
+						<td>form-action</td>
+						<td>report-uri</td>
+						<td>block-all-mixed-content</td>
+					</tr>
+					<tr>
+						<td>connect-src</td>
+						<td>plugin-types</td>
+						<td>frame-ancestors</td>
+						<td>report-to</td>
+						<td>referrer</td>
+					</tr>
+					<tr>
+						<td>default-src</td>
+						<td>sandbox</td>
+						<td>navigation-to</td>
+						<td></td>
+						<td>require-sri-for</td>
+					</tr>
+					<tr>
+						<td>font-src</td>
+						<td>disown-opener</td>
+						<td></td>
+						<td></td>
+						<td>upgrade-insecure-requests</td>
+					</tr>
+					<tr>
+						<td>frame-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>img-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>manifest-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>media-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>object-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>prefetch-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>script-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>style-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>worker-src</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					</tbody>
+				</table>
+			</section>
+
 		</div>
 	</div>
 
