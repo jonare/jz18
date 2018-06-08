@@ -22,12 +22,39 @@
 		</script>
 	</head>
 	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Content Security Policy i praksis</h1>
+				<h2>Jon Are Rakvåg</h2>
+				<h3>SpareBank 1</h3>
+			</section>
+
+			<section>
+				<h3>Websikkerhet er vanskelig</h3>
+				<div class="fragment fade-in">CSP er nesten gratis vaksine mot Cross-site scripting (XSS), click-jacking, flere typer injection, flere typer informasjonslekkasje</div>
+			</section>
+
+			<section>//TODO: illustrasjon av server som lover nettleser hvordan den har tenkt å oppføre seg</section>
+
+			<section>
+<pre><code>HTTP/1.1 200 OK
+Content-Security-Policy: ...
+Content-Security-Policy-Report-Only: ...</code></pre>
+				<pre class="fragment">
+<code>&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Security-Policy" content="..."&gt;
+&lt;meta http-equiv="Content-Security-Policy-Report-Only" content="..."&gt;</code></pre>
+			</section>
+
+			<section>
+				<pre><code data-noescape>Content-Security-Policy: <i>directive</i>; <i>directive</i>; <i>directive</i>;</code></pre>
+				<pre class="fragment"><code data-noescape>Content-Security-Policy: default-src: 'self'; report-uri /log/csp </code></pre>
+
+			</section>
 		</div>
+	</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
@@ -42,7 +69,9 @@
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
+				],
+              transition: 'convex',
+              history: true
 			});
 		</script>
 	</body>
