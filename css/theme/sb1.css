@@ -7,6 +7,38 @@
 section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
   color: #222; }
 
+.reveal table th {
+  font-weight: bold;
+  font-size: x-large; }
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 2.5em 0.5em 0.5em !important;
+  border-bottom: 0px solid !important; }
+
+.reveal .slides section .fragment.dim {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.dim.visible {
+    opacity: 0.15;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.semi-dim {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.semi-dim.visible {
+    opacity: 0.4;
+    visibility: inherit; }
+
+.reveal .slides section .fragment.highlight-1,
+.reveal .slides section .fragment.highlight-2 {
+  opacity: 1;
+  visibility: inherit; }
+  .reveal .slides section .fragment.highlight-1.visible,
+  .reveal .slides section .fragment.highlight-2.visible {
+    transform: scale(1.5); }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -168,13 +200,13 @@ body {
   border-spacing: 0; }
 
 .reveal table th {
-  font-weight: bold;
-  font-size: x-large; }
+  font-weight: bold; }
 
 .reveal table th,
 .reveal table td {
   text-align: left;
-  padding: 0.2em 2.5em 0.5em 0.5em; }
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid; }
 
 .reveal table th[align="center"],
 .reveal table td[align="center"] {

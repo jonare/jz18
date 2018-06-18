@@ -43,6 +43,49 @@ section.has-light-background {
 	}
 }
 
+.reveal table th {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+.reveal table th,
+.reveal table td {
+	text-align: left;
+	padding: 0.2em 2.5em 0.5em 0.5em !important;
+	border-bottom: 0px solid !important;
+}
+
+.reveal .slides section .fragment.dim {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		opacity: 0.15;
+		visibility: inherit;
+	}
+}
+
+.reveal .slides section .fragment.semi-dim {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		opacity: 0.4;
+		visibility: inherit;
+	}
+}
+
+
+.reveal .slides section .fragment.highlight-1,
+.reveal .slides section .fragment.highlight-2 {
+	opacity: 1;
+	visibility: inherit;
+
+	&.visible {
+		transform: scale( 1.5 );
+	}
+}
+
 
 // Theme template ------------------------------
 @import "../template/theme";
