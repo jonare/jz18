@@ -199,14 +199,16 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			</section>
 
 			<section>
+				<h1>Show me the money</h1>
 				<aside class="notes">
 					1. KWAHC
-						Intro
+						Intro - vis i vanlig Chrome
 						Legge inn XSS payload
 							Det er ikke bra, og en av situasjonene der CSP kan hjelpe.
 					2. Bygge opp første versjon CSP i report-uri
 						Trykk gjennom
 						Generer og les gjennom
+							Content-Security-Policy: default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ; upgrade-insecure-requests;
 					3. Få CSP inn på server
 						Kan legge inn som vanlig kode, men
 							Ofte vil ikke testsystem og prodsystem være helt likt ned på de viktige detaljene med CSP. -Hostnavn, innhold kan være litt forskjellig
@@ -223,23 +225,69 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 							unngå unsafe-inline
 							hash: oppgitt og enklet, men brekker om man endrer på et eneste tegn i scriptet. Velegnet dersom man har legacy inline-kode.
 							nonce: kommer tilbake til det
+						Resultat
+					Content-Security-Policy: default-src 'none' ; script-src 'self' code.jquery.com 'sha256-CGYyHS8cQDmy3OZhb8SAuWNYZA62HZo3+kyZUKP+vmI=' 'sha256-YyqwI4T7AD/UUsOAHEspjPDpFXBMshnIO5L24i2WQ8s='; style-src 'self' 'sha256-j0bVhc2Wj58RJgvcJPevapx5zlVLw6ns6eYzK/hcA04=' 'sha256-j6Tt8qv7z2kSc7fUs0YHbrxawwsQcS05fVaX1r2qrbk=' 'sha256-p4cncjf0hAIeTSS5tXecf7qTUanDC27KdlKhT9eOsZU='; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ; upgrade-insecure-requests;
+				</aside>
+			</section>
+
+			<section>
+				<h2>Reporting</h2>
+<pre><code data-noescape class="hljs json">{"csp-report":
+	{"document-uri":"http://localhost:8079/blog",
+	"violated-directive":"script-src",
+	"effective-directive":"script-src",
+	"original-policy":"default-src 'none'; script-src 'self';
+	style-src 'self'; img-src 'self'; report-uri /csp",
+	"disposition":"enforce",
+	"blocked-uri":"inline",
+	"line-number":88,
+	"source-file":"http://localhost:8079/blog",
+	"status-code":200,
+	"script-sample":""}
+}</code></pre>
+				<aside class="notes">
+					Essensielt
+					Teknisk sett ganske enkelt. JSON som POST'es til endepunktet du oppgir.
+					Inneholder det man trenger for å forstå hva som gikk galt
+					Du kan sette det opp selv, men isolert feature som egner seg godt til skyløsning som report-uri.com
+
+				</aside>
+			</section>
+
+			<section>
+				<h2>Praktisk framgangsmåte</h2>
+				<ol>
+					<li>Bygg en CSP manuelt eller med <a href="https://report-uri.com/home/generate" target="_blank" rel="noopener">report-uri.com</a></li>
+					<li>Sett opp rapporteringstjeneste, f. eks <a href="https://report-uri.com/" target="_blank" rel="noopener">report-uri.com</a> </li>
+					<li>Legg til policy som Content-Security-Policy-Report-Only gjennom vanlig utviklingssyklus</li>
+					<li>Følg med på rapporteringen</li>
+					<li>Endre til Content-Security-Policy (enforce)</li>
+					<li>Gjenta 3-5</li>
+				</ol>
+				<aside class="notes">
+					Framgangsmåte i praksis
+					1. Bygg en CSP manuelt, eller med report-uri
+						Som vanlig kode hvis du har en helt enkel app
+						Med OWASP Zap eller annen proxy mot produksjon ellers
+					2. Sett opp rapporteringstjeneste, selv eller report-uri.com. Helst forskjellig test og prod.
+					3. Legg den til som Content-Security-Policy-Report-Only gjennom vanlig utviklignssyklus.
+					4. Følg med på rapporteringen (inkl at rapporteringen funker)
+					5. Endre til Content-Security-Policy
+					6. Legg til endringer i directives som egen Content-Security-Policy-Report-Only
+
 				</aside>
 			</section>
 
 			<section>
 				<aside class="notes">
 					Kjør policy gjennom https://csp-evaluator.withgoogle.com/
-						Legg til www.google.com på script, vis advarselen
+					Legg til www.google.com på script, vis advarselen
+						Ikke bare hoster google.com alt mulig rart av script
+							men også JSONP. Kan inneholde callbacks som tillater vilkårlige scripts
+					host-basert tilærming lugger litt når man laster ting fra "hele verden"
 
 					strict-dynamic
 
-
-				</aside>
-			</section>
-
-			<section>
-				<aside class="notes">
-					...reporting
 
 				</aside>
 			</section>
