@@ -200,21 +200,39 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 
 			<section>
 				<aside class="notes">
-					...gjennomgang av de viktigste directivene
-					...host vs nonce-basert anti-xss her? Eller senere? Sammenheng med unsafe-inline/hash.
+					1. KWAHC
+						Intro
+						Legge inn XSS payload
+							Det er ikke bra, og en av situasjonene der CSP kan hjelpe.
+					2. Bygge opp første versjon CSP i report-uri
+						Trykk gjennom
+						Generer og les gjennom
+					3. Få CSP inn på server
+						Kan legge inn som vanlig kode, men
+							Ofte vil ikke testsystem og prodsystem være helt likt ned på de viktige detaljene med CSP. -Hostnavn, innhold kan være litt forskjellig
+						Vi kan ta et skritt tilbake, og utnytte at arkitekturen er som den er. Dette er en kontrakt mellom server og nettleser. Vi kan steppe inn mellom
+						server og nettleser, og injisere vår egen CSP ved å modifisere http-responsen
+					4. OWASP ZAP
+						Intro, launch Chrome, replacer
+						Vis CSP i Chrome for KWASHC
+							Bare vi i hele verden som har denne CSP'en
+							Men det gjelder for oss for alle sider i hele verden
+					5. Utvid CSP gjennom konsollfeilmeldinger
+						...
+						unsafe-inline vs hash vs nonce
+							unngå unsafe-inline
+							hash: oppgitt og enklet, men brekker om man endrer på et eneste tegn i scriptet. Velegnet dersom man har legacy inline-kode.
+							nonce: kommer tilbake til det
 				</aside>
 			</section>
 
 			<section>
 				<aside class="notes">
-					...bygge opp en CSP (inkl proxy?)
+					Kjør policy gjennom https://csp-evaluator.withgoogle.com/
+						Legg til www.google.com på script, vis advarselen
 
-				</aside>
-			</section>
+					strict-dynamic
 
-			<section>
-				<aside class="notes">
-					Du vil unngå unsafe-inline, unsafe-eval, data:
 
 				</aside>
 			</section>
@@ -229,6 +247,9 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			<section>
 				<aside class="notes">
 					...oppsummering
+
+
+					Du vil unngå unsafe-inline, unsafe-eval, data:
 
 				</aside>
 			</section>
