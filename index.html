@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta http-equiv="Content-Security-Policy-Report-Only" content="default-src 'none'; script-src 'self' 'sha256-Qh64xYcgWycpuYWAoy8Q3vHBxoDLAx4Xs8LYId0Yuf0=' 'sha256-YhyZpVeVQ58hiVUUlNwkTu06yNQJOrICMHNwBzqIc5g=' 'sha256-tGyUL6WrUldnEyTV8SOoW3TZl5JnnYDIg1aYzR794zc='; style-src 'self' 'sha256-fvX0U73dvOFS6B+ARkit2Zm1/tmQII0UjOmTa+SDO5w='; connect-src 'self'; font-src 'self'; img-src 'self';">
 
 		<title>reveal.js</title>
 
@@ -32,7 +33,7 @@
 
 			<section>
 				<h3>Websikkerhet er vanskelig</h3>
-				<div class="fragment fade-in">CSP er nesten gratis vaksine mot Cross-site scripting (XSS), click-jacking, flere typer injection, flere typer informasjonslekkasje</div>
+				<div class="fragment fade-in">CSP er nesten gratis vaksine mot Cross-site scripting (XSS), click-jacking, flere typer content injection, flere typer informasjonslekkasje</div>
 			</section>
 
 			<section>//TODO: illustrasjon av server som lover nettleser hvordan den har tenkt å oppføre seg</section>
@@ -61,19 +62,20 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 					Ikke så realistisk
 					Forklar directivene
 						default-src
+							Sekkeposten
 						'self'
+							self med fnutter parses av nettleseren til det FQDN som hoster siden
+						default-src 'self'
+							betyr altså "last hva som helst (script, bilder, fonter, media, plugins), men bare fra www.sparebank1.no
 						report-uri
 							Superfin JSON POST
-					I det virkelige liv også litt vanskelig
-					default-src er sekkeposten, der vi ikke har spesifisert directivet
-					CSP-rapportene inkluderer hvilket directive som ble brutt, og "default-src" gir ingen hjelp
 				</aside>
 			</section>
 
 			<section>
 				<pre><code data-noescape class="hljs csp">Content-Security-Policy: default-src 'self';
-                         script-src js.sparebank1.no;
-                         style-src 'self';
+                         script-src static.sparebank1.no;
+                         style-src 'self' static.sparebank1.no;
                          img-src 'self' www.facebook.com;
                          object-src 'none';
                          report-uri /log/csp</code></pre>
@@ -199,7 +201,7 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			</section>
 
 			<section>
-				<h1>Show me the money</h1>
+				<h1>POC &oplus; GTFO</h1>
 				<aside class="notes">
 					1. KWAHC
 						Intro - vis i vanlig Chrome
@@ -260,7 +262,7 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 					<li>Bygg en CSP manuelt eller med <a href="https://report-uri.com/home/generate" target="_blank" rel="noopener">report-uri.com</a></li>
 					<li>Sett opp rapporteringstjeneste, f. eks <a href="https://report-uri.com/" target="_blank" rel="noopener">report-uri.com</a> </li>
 					<li>Legg til policy som Content-Security-Policy-Report-Only gjennom vanlig utviklingssyklus</li>
-					<li>Følg med på rapporteringen</li>
+					<li>Følg med på rapporteringen, og oppdater</li>
 					<li>Endre til Content-Security-Policy (enforce)</li>
 					<li>Gjenta 3-5</li>
 				</ol>
@@ -279,6 +281,16 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			</section>
 
 			<section>
+				<h2>host-based | strict-dynamic script-src</h2>
+				<pre class="fragment"><code data-noescape class="hljs csp">Content-Security-Policy: script-src 'strict-dynamic'
+			'nonce-o73WIx9dlTnmzQk2lBdkzA=='; (...)</code></pre>
+				<pre class="fragment">
+<code>&lt;script src="https://www.google.com/good.js"
+nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
+
+&lt;script src="https://www.google.com/evil.js"/&gt; &lt;!-- nope --&gt;
+</code></pre>
+			</section>
 				<aside class="notes">
 					Kjør policy gjennom https://csp-evaluator.withgoogle.com/
 					Legg til www.google.com på script, vis advarselen
@@ -293,13 +305,56 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			</section>
 
 			<section>
+			<div>
+				<p>
+				<h3>Host</h3>
+				<ul>
+					<li>Du stoler på all JS på hosten</li>
+					<li>Enkelt</li>
+					<li>Takler ikke CDNer eller JSONP</li>
+				</ul>
+				</p>
+			</div>
+			<div class="fragment">
+				<p>
+					<h3>dynamic</h3>
+					<ul>
+						<li>Du stoler på kode <i>du</i> laster (fra hele verden)</li>
+						<li>Krever logikk for nonce i CSP og tagger</li>
+					</ul>
+				</p>
+				<p>(bør kombineres med SRI)</p>
+			</div>
+			</section>
+
+			<section>
 				<aside class="notes">
 					...oppsummering
 
 
-					Du vil unngå unsafe-inline, unsafe-eval, data:
+					Du vil unngå unsafe-inline, unsafe-eval, data: på script og style
 
 				</aside>
+			</section>
+			<section>
+				<h2>Lenker</h2>
+				<div><p>Slides: <a href="https://jonare.github.io/" target="_blank" rel="noopener">jonare.github.io</a></p></div>
+				<div>
+					<p>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank" rel="noopener">Mozilla Developer Network: CSP</a><br>
+						<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">Mozilla Developer Network: SRI</a><br>
+						<a href="https://report-uri.com/home/generate" target="_blank" rel="noopener">report-uri.com CSP Builder</a><br>
+						<a href="https://csp-evaluator.withgoogle.com/" target="_blank" rel="noopener">Google CSP Evaluator</a><br>
+						<a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a><br>
+						<a href="https://github.com/kantega/kwashc" target="_blank" rel="noopener">KWASHC</a><br>
+
+
+					</p>
+					<p>
+						Jon Are Rakvåg | <a href="https://twitter.com/jonarer" target="_blank" rel="noopener">@jonarer</a><br>
+					</p>
+				</div>
+
 			</section>
 
 		</div>
