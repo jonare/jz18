@@ -279,7 +279,8 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			</section>
 
 			<section>
-				<h2>host-based | strict-dynamic script-src</h2>
+				<h2>host-based | strict-dynamic</h2>
+				<p>for script-src og style-src</p>
 				<pre class="fragment"><code data-noescape class="hljs csp">Content-Security-Policy: script-src 'strict-dynamic'
 			'nonce-o73WIx9dlTnmzQk2lBdkzA=='; (...)</code></pre>
 				<pre class="fragment">
@@ -326,9 +327,14 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 			</section>
 
 			<section>
+				<h2>Oppsummering</h2>
+				<span>Bruk CSP<br/></span>
+				<span class="fragment">CSP-Report-Only gir deg ~risikofri testkjøring<br/></span>
+				<span class="fragment">Sett opp egen rapportering, eller report-uri.com<br/></span>
+				<span class="fragment">Webproxy header injection for å utvikle mot prod<br/></span>
+				<span class="fragment">Viktigst: script-src, style-src, object-src<br/></span>
+				<span class="fragment">Unngå unsafe-inline, unsafe-eval (og data: på script og style)<br/></span>
 				<aside class="notes">
-					...oppsummering
-
 
 					Du vil unngå unsafe-inline, unsafe-eval, data: på script og style
 
