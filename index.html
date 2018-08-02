@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>CSP i praksis</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/sb1.css">
@@ -33,6 +33,11 @@
 			<section>
 				<h3>Websikkerhet er vanskelig</h3>
 				<div class="fragment fade-in">CSP er nesten gratis vaksine mot Cross-site scripting (XSS), click-jacking, flere typer content injection, flere typer informasjonslekkasje</div>
+
+				<aside class="notes">
+
+				</aside>
+
 			</section>
 
 			<section>//TODO: illustrasjon av server som lover nettleser hvordan den har tenkt å oppføre seg</section>
@@ -46,6 +51,14 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 &lt;head&gt;
 &lt;meta http-equiv="Content-Security-Policy" content="..."&gt;
 </code></pre>
+
+				<aside class="notes">
+					Vanligvis header
+					Enforce og report-only
+					meta tag, uten report
+					Gjelder bare den html-siden
+
+				</aside>
 			</section>
 
 			<section>
@@ -140,7 +153,7 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="fragment semi-dim" data-fragment-index="2">manifest-src</td>
+						<td>manifest-src</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -257,7 +270,7 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			<section>
 				<h2>Praktisk framgangsmåte</h2>
 				<ol>
-					<li>Bygg en CSP manuelt eller med <a href="https://report-uri.com/home/generate" target="_blank" rel="noopener">report-uri.com</a></li>
+					<li>Bygg en CSP (semi)manuelt med <a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a></li>
 					<li>Sett opp rapporteringstjeneste, f. eks <a href="https://report-uri.com/" target="_blank" rel="noopener">report-uri.com</a> </li>
 					<li>Legg til policy som Content-Security-Policy-Report-Only gjennom vanlig utviklingssyklus</li>
 					<li>Følg med på rapporteringen, og oppdater</li>
@@ -291,6 +304,10 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 </code></pre>
 			</section>
 				<aside class="notes">
+					Noen ord om alternativ tilnærming til script-src og style-src (anti-XSS)
+						Hittil har vi oppgitt hvilke hosts vi vil laste script og styles fra
+							Det funker ganske bra der vi kontrollerer hostene vi laster fra
+							Mer problematisk der vi laster script fra andre, bruker JSONP eller har brukercontent
 					Kjør policy gjennom https://csp-evaluator.withgoogle.com/
 					Legg til www.google.com på script, vis advarselen
 						Ikke bare hoster google.com alt mulig rart av script
@@ -298,6 +315,10 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 					host-basert tilærming lugger litt når man laster ting fra "hele verden"
 
 					strict-dynamic
+						instruerer nettleseren til å ignorere hostliste, og kun bruke hash eller nonce
+						nonce - number used once - tilfeldig verdi for denne pageloaden
+						På mange måter enklere enn host-listen, men forutsetter logikk som
+							genererer nonce og syr den inn i header og html
 
 
 				</aside>
@@ -322,7 +343,8 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 						<li>Krever logikk for nonce i CSP og tagger</li>
 					</ul>
 				</p>
-				<p>(bør kombineres med SRI)</p>
+				<p>(bør kombineres med <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">
+					Subresource integrity</a>)</p>
 			</div>
 			</section>
 
