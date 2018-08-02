@@ -67,27 +67,9 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 
 			<section>
 				<pre><code data-noescape class="hljs csp">Content-Security-Policy: default-src 'self';
-                         report-uri /log/csp</code></pre>
-				<aside class="notes">
-					Nyttig CSP i sin aller enkleste form
-					Ikke så realistisk
-					Forklar directivene
-						default-src
-							Sekkeposten
-						'self'
-							self med fnutter parses av nettleseren til det FQDN som hoster siden
-						default-src 'self'
-							betyr altså "last hva som helst (script, bilder, fonter, media, plugins), men bare fra www.sparebank1.no
-						report-uri
-							Superfin JSON POST
-				</aside>
-			</section>
-
-			<section>
-				<pre><code data-noescape class="hljs csp">Content-Security-Policy: default-src 'self';
                          script-src static.sparebank1.no;
                          style-src 'self' static.sparebank1.no;
-                         img-src 'self' www.facebook.com;
+                         img-src 'self';
                          object-src 'none';
                          report-uri /log/csp</code></pre>
 				<aside class="notes">
@@ -244,30 +226,6 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			</section>
 
 			<section>
-				<h2>Reporting</h2>
-<pre><code data-noescape class="hljs json">{"csp-report":
-	{"document-uri":"http://localhost:8079/blog",
-	"violated-directive":"script-src",
-	"effective-directive":"script-src",
-	"original-policy":"default-src 'none'; script-src 'self';
-	style-src 'self'; img-src 'self'; report-uri /csp",
-	"disposition":"enforce",
-	"blocked-uri":"inline",
-	"line-number":88,
-	"source-file":"http://localhost:8079/blog",
-	"status-code":200,
-	"script-sample":""}
-}</code></pre>
-				<aside class="notes">
-					Essensielt
-					Teknisk sett ganske enkelt. JSON som POST'es til endepunktet du oppgir.
-					Inneholder det man trenger for å forstå hva som gikk galt
-					Du kan sette det opp selv, men isolert feature som egner seg godt til skyløsning som report-uri.com
-
-				</aside>
-			</section>
-
-			<section>
 				<h2>Praktisk framgangsmåte</h2>
 				<ol>
 					<li>Bygg en CSP (semi)manuelt med <a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a></li>
@@ -302,7 +260,6 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 
 &lt;script src="https://www.google.com/evil.js"/&gt; &lt;!-- nope --&gt;
 </code></pre>
-			</section>
 				<aside class="notes">
 					Noen ord om alternativ tilnærming til script-src og style-src (anti-XSS)
 						Hittil har vi oppgitt hvilke hosts vi vil laste script og styles fra
@@ -322,30 +279,6 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 
 
 				</aside>
-			</section>
-
-			<section>
-			<div>
-				<p>
-				<h3>Host</h3>
-				<ul>
-					<li>Du stoler på all JS på hosten</li>
-					<li>Enkelt</li>
-					<li>Takler ikke CDNer eller JSONP</li>
-				</ul>
-				</p>
-			</div>
-			<div class="fragment">
-				<p>
-					<h3>dynamic</h3>
-					<ul>
-						<li>Du stoler på kode <i>du</i> laster (fra hele verden)</li>
-						<li>Krever logikk for nonce i CSP og tagger</li>
-					</ul>
-				</p>
-				<p>(bør kombineres med <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">
-					Subresource integrity</a>)</p>
-			</div>
 			</section>
 
 			<section>
