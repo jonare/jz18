@@ -90,6 +90,11 @@ section.has-light-background {
 	width: 100% !important;
 }
 
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+	text-transform: none !important;
+}
 
 // Theme template ------------------------------
 @import "../template/theme";
