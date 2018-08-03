@@ -10,7 +10,8 @@
 		<link rel="stylesheet" href="css/theme/sb1.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet"
+			  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -25,9 +26,9 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h1>Content Security Policy i praksis</h1>
-				<h2>Jon Are Rakvåg</h2>
-				<h3>SpareBank 1</h3>
+				<h2>Content Security Policy i praksis</h2>
+				<h3>Jon Are Rakvåg</h3>
+				<h4>SpareBank 1</h4>
 			</section>
 
 			<section>
@@ -40,7 +41,12 @@
 
 			</section>
 
-			<section>//TODO: illustrasjon av server som lover nettleser hvordan den har tenkt å oppføre seg</section>
+			<section>
+				<img src="img/csp0.png" class="plain"/>
+			</section>
+			<section data-transition="slide">
+				<img src="img/csp1.png" class="plain"/>
+			</section>
 
 			<section>
 <pre><code>HTTP/1.1 200 OK
@@ -333,7 +339,7 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				],
-              transition: 'convex',
+              transition: 'slide',
               history: true
 			});
 		</script>
