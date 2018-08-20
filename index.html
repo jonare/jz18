@@ -26,14 +26,14 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-				<h2>Content Security Policy i praksis</h2>
-				<h4>Jon Are Rakvåg</h4>
-				<h5>SpareBank 1</h5>
+				<h2>Content Security Policy<br/>i praksis</h2>
+				<p>Jon Are Rakvåg<br/>
+				SpareBank 1</p>
 			</section>
 
 			<section>
 				<h3>Websikkerhet er vanskelig</h3>
-				<div class="fragment fade-in">CSP er nesten gratis vaksine mot Cross-site scripting (XSS), click-jacking, flere typer content injection, flere typer informasjonslekkasje</div>
+				<div class="fragment fade-in">CSP er billig vaksine* mot XSS, click-jacking, flere typer content injection og informasjonslekkasje</div>
 
 				<aside class="notes">
 
@@ -234,12 +234,11 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			<section>
 				<h2>Praktisk framgangsmåte</h2>
 				<ol>
-					<li>Bygg en CSP (semi)manuelt med <a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a></li>
+					<li>Bygg en CSP med <a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a></li>
 					<li>Sett opp rapporteringstjeneste, f. eks <a href="https://report-uri.com/" target="_blank" rel="noopener">report-uri.com</a> </li>
-					<li>Legg til policy som Content-Security-Policy-Report-Only gjennom vanlig utviklingssyklus</li>
+					<li>Legg til policy som Content-Security-Policy-Report-Only</li>
 					<li>Følg med på rapporteringen, og oppdater</li>
 					<li>Endre til Content-Security-Policy (enforce)</li>
-					<li>Gjenta 3-5</li>
 				</ol>
 				<aside class="notes">
 					Framgangsmåte i praksis
@@ -289,21 +288,20 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 
 			<section>
 				<h2>Oppsummering</h2>
+
 				<span>Bruk CSP<br/></span>
-				<span class="fragment">CSP-Report-Only gir deg ~risikofri testkjøring<br/></span>
-				<span class="fragment">Sett opp egen rapportering, eller report-uri.com<br/></span>
-				<span class="fragment">Webproxy header injection for å utvikle mot prod<br/></span>
+				<span class="fragment">Egen rapportering, eller report-uri.com<br/></span>
+				<span class="fragment">Utvikle mot prod med ZAP<br/></span>
 				<span class="fragment">Viktigst: script-src, style-src, object-src<br/></span>
-				<span class="fragment">Unngå unsafe-inline, unsafe-eval (og data: på script og style)<br/></span>
+				<span class="fragment">Unngå 'unsafe-inline', 'unsafe-eval' og data: på script og style<br/></span>
 				<aside class="notes">
 
-					Du vil unngå unsafe-inline, unsafe-eval, data: på script og style
 
 				</aside>
 			</section>
 			<section>
 				<h2>Lenker</h2>
-				<div><p>Slides: <a href="https://jonare.github.io/" target="_blank" rel="noopener">jonare.github.io</a></p></div>
+				<div><p>Slides: <a href="https://jonare.github.io/jz18" target="_blank" rel="noopener">jonare.github.io/jz18</a></p></div>
 				<div>
 					<p>
 						<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank" rel="noopener">Mozilla Developer Network: CSP</a><br>
