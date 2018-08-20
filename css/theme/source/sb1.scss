@@ -10,7 +10,7 @@
 
 
 // Include theme-specific fonts
-@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(https://design.sparebank1.no/ffe.css);
 
 
 // Override theme settings (see ../template/settings.scss)
@@ -20,12 +20,11 @@ $mainColor: #000;
 $headingColor: #002776;
 
 $mainFontSize: 42px;
-$mainFont: 'Museo Sans Pro', Helvetica, sans-serif;
-$headingFont: 'Museo Sans Pro', Helvetica, sans-serif;
+$mainFont: MuseoSans-400, arial, sans-serif;
+$headingFont: MuseoSansRounded-700, arial, sans-serif;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
-$headingTextTransform: uppercase;
-$headingFontWeight: 600;
+$headingTextTransform: none;
 $linkColor: #0071CD;
 $linkColorHover: lighten( $linkColor, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
