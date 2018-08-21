@@ -31,9 +31,9 @@
 				SpareBank 1</p>
 			</section>
 
-			<section>
+			<section data-autoslide="0">
 				<h3>Websikkerhet er vanskelig</h3>
-				<div class="fragment fade-in">CSP er billig vaksine* mot XSS, click-jacking, flere typer content injection og informasjonslekkasje</div>
+				<div class="fragment fade-in" data-autoslide="1000">CSP er billig vaksine mot XSS, click-jacking, flere typer content injection og informasjonslekkasje</div>
 
 				<aside class="notes">
 
@@ -235,10 +235,10 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 				<h2>Praktisk framgangsmåte</h2>
 				<ol>
 					<li>Bygg en CSP med <a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a></li>
-					<li>Sett opp rapporteringstjeneste, f. eks <a href="https://report-uri.com/" target="_blank" rel="noopener">report-uri.com</a> </li>
-					<li>Legg til policy som Content-Security-Policy-Report-Only</li>
-					<li>Følg med på rapporteringen, og oppdater</li>
-					<li>Endre til Content-Security-Policy (enforce)</li>
+					<li class="fragment">Sett opp rapporteringstjeneste, f. eks <a href="https://report-uri.com/" target="_blank" rel="noopener">report-uri.com</a></li>
+					<li class="fragment">=&gt; Content-Security-Policy-Report-Only</li>
+					<li class="fragment">Følg med på rapporteringen, og oppdater</li>
+					<li class="fragment">Endre til Content-Security-Policy (enforce)</li>
 				</ol>
 				<aside class="notes">
 					Framgangsmåte i praksis
@@ -292,7 +292,6 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 				<span>Bruk CSP<br/></span>
 				<span class="fragment">Egen rapportering, eller report-uri.com<br/></span>
 				<span class="fragment">Utvikle mot prod med ZAP<br/></span>
-				<span class="fragment">Viktigst: script-src, style-src, object-src<br/></span>
 				<span class="fragment">Unngå 'unsafe-inline', 'unsafe-eval' og data: på script og style<br/></span>
 				<aside class="notes">
 
