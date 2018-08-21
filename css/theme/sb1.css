@@ -45,6 +45,12 @@ section.has-light-background, section.has-light-background h1, section.has-light
 .reveal h6 {
   text-transform: none !important; }
 
+html.intro h2 {
+  color: #ffffff; }
+
+html.intro p {
+  color: #DFF1F9; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/

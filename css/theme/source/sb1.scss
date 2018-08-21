@@ -93,6 +93,14 @@ section.has-light-background {
 	text-transform: none !important;
 }
 
+
+html.intro h2 {
+	color: #ffffff;
+}
+html.intro p {
+	color: #DFF1F9;
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
