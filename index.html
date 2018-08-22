@@ -31,21 +31,37 @@
 				SpareBank 1</p>
 			</section>
 
-			<section data-autoslide="0">
+			<section>
 				<h3>Websikkerhet er vanskelig</h3>
-				<div class="fragment fade-in" data-autoslide="1000">CSP er billig vaksine mot XSS, click-jacking, flere typer content injection og informasjonslekkasje</div>
+				<div class="fragment fade-in">CSP er billig vaksine mot XSS, click-jacking, flere typer content injection og informasjonslekkasje</div>
 
 				<aside class="notes">
-
+					Websikkerhet er vanskelig
+						Mest fordi det er komplekst. Mange ting kan gå feil på mange måter.
+						Av og til finner man teknikker eller verktøy som løser kompliserte ting på en effektiv måte
+						CSP er en av dem
+							Vaksine mot en hel masse hodepiner, mest kjent cross site scripting
 				</aside>
 
 			</section>
 
 			<section>
 				<img src="img/csp0.png" class="plain"/>
+
+				<aside class="notes">
+					CSP er webserveren din som lover nettleseren til brukeren hvordan denne siden kommer til å oppføre seg
+						Laster script herifra, styles derifra, javascriptene våre kommer til å connecte ut til disse serverne
+				</aside>
 			</section>
 			<section data-transition="slide">
 				<img src="img/csp1.png" class="plain"/>
+
+				<aside class="notes">
+					Når reglene brytes - når f. eks et form plutselig forsøker å poste innhold til en host vi aldri
+					har snakket om før, så skal nettleseren reagere
+						Iallfall rapportere
+						Helst også blokkere regelbruddet
+				</aside>
 			</section>
 
 			<section>
@@ -75,13 +91,12 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 				<pre><code data-noescape class="hljs csp">Content-Security-Policy: default-src 'self';
                          script-src static.sparebank1.no;
                          style-src 'self' static.sparebank1.no;
-                         img-src 'self';
                          object-src 'none';
                          report-uri /log/csp</code></pre>
 				<aside class="notes">
 					Noen viktige og vanlige directives
 					Gå fort gjennom
-					(Mangel på) arv
+					report-uri er her bare path, kan være full URL
 				</aside>
 			</section>
 
@@ -281,8 +296,6 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 						nonce - number used once - tilfeldig verdi for denne pageloaden
 						På mange måter enklere enn host-listen, men forutsetter logikk som
 							genererer nonce og syr den inn i header og html
-
-
 				</aside>
 			</section>
 
@@ -290,12 +303,14 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 				<h2>Oppsummering</h2>
 
 				<span>Bruk CSP<br/></span>
-				<span class="fragment">Egen rapportering, eller report-uri.com<br/></span>
+				<span class="fragment">Rapportering i sky<br/></span>
 				<span class="fragment">Utvikle mot prod med ZAP<br/></span>
-				<span class="fragment">Unngå 'unsafe-inline', 'unsafe-eval' og data: på script og style<br/></span>
+				<span class="fragment">Unngå ting som heter unsafe<br/></span>
+				<span class="fragment">'strict-dynamic' + nonce kan være mest robust<br/></span>
+
 				<aside class="notes">
-
-
+					Bruk CSP
+						CSP er enkelt å komme i gang med, og er et effektivt sikkerhetsnett for vanskelige problemer
 				</aside>
 			</section>
 			<section>
@@ -304,21 +319,17 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 				<div>
 					<p>
 						<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy" target="_blank" rel="noopener">Mozilla Developer Network: CSP</a><br>
-						<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" target="_blank" rel="noopener">Mozilla Developer Network: SRI</a><br>
 						<a href="https://report-uri.com/home/generate" target="_blank" rel="noopener">report-uri.com CSP Builder</a><br>
+						<a href="https://githubengineering.com/githubs-post-csp-journey/" target="_blank" rel="noopener">GitHub's post-CSP journey</a><br>
 						<a href="https://csp-evaluator.withgoogle.com/" target="_blank" rel="noopener">Google CSP Evaluator</a><br>
 						<a href="https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project" target="_blank" rel="noopener">OWASP ZAP</a><br>
 						<a href="https://github.com/kantega/kwashc" target="_blank" rel="noopener">KWASHC</a><br>
-
-
 					</p>
 					<p>
 						Jon Are Rakvåg | <a href="https://twitter.com/jonarer" target="_blank" rel="noopener">@jonarer</a><br>
 					</p>
 				</div>
-
 			</section>
-
 		</div>
 	</div>
 
