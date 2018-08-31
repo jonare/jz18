@@ -52,14 +52,9 @@ section.has-light-background {
 	border-bottom: 0px solid !important;
 }
 
-.reveal .slides section .fragment.dim {
-	opacity: 1;
+.reveal .slides section .dim {
+	opacity: 0.2;
 	visibility: inherit;
-
-	&.visible {
-		opacity: 0.15;
-		visibility: inherit;
-	}
 }
 
 .reveal .slides section .fragment.semi-dim {
