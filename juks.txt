@@ -9,12 +9,3 @@ https://csp-evaluator.withgoogle.com/
 Content-Security-Policy: default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ;	
 
 Content-Security-Policy: default-src 'none' ; script-src 'self' code.jquery.com 'sha256-CGYyHS8cQDmy3OZhb8SAuWNYZA62HZo3+kyZUKP+vmI='; style-src 'self' 'sha256-j0bVhc2Wj58RJgvcJPevapx5zlVLw6ns6eYzK/hcA04=' 'sha256-j6Tt8qv7z2kSc7fUs0YHbrxawwsQcS05fVaX1r2qrbk=' 'sha256-p4cncjf0hAIeTSS5tXecf7qTUanDC27KdlKhT9eOsZU='; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ;
-
-
-Hva galt kunne du gjort hvis du fikk kjøre ditt JS som en del av vår nettbank?
-Hva galt kunne jeg gjort, hvis jeg fikk kjøre mitt JS som en del av din webløsning?
-Svaret er: overraskende mye
-Selv om JS bare kjører i nettleseren, kan det gjøre mye skade
-Endre alt brukeren ser, endre alt brukeren sender fra seg, gjøre nye requests i brukerens navn, ta alt som ligger i DOMen og sende det til et annet sted
-Hvis du fikk kjøre ditt JS i vår nettbank, kunne du f. eks endret på betalingene folk legger inn. -Mottakerkonto og sum, uten at brukeren ser det. Sånt vil man unngå i enhver løsning som gjør noe viktig.
-Jeg heter Jon Are, og jobber med websikker i SpareBank 1. Jeg er her for å snakke om en praktisk tilnærming til et viktig sikkerhetsverktøy som heter Content Security Policy. 
