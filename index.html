@@ -264,6 +264,11 @@ Content-Security-Policy-Report-Only: ...</code></pre>
 			<section>
 				<h2>host-based | strict-dynamic</h2>
 				<p>for script-src og style-src</p>
+				<pre class="fragment"><code>public String generateNonce(){
+   byte[] nonceBytes = new byte[16];                      //128 bits
+   new SecureRandom().nextBytes(nonceBytes);              //populate
+   return Base64.getEncoder().encodeToString(nonceBytes); //encode
+}</code></pre>
 				<pre class="fragment"><code data-noescape class="hljs csp">Content-Security-Policy: script-src 'strict-dynamic'
 			'nonce-o73WIx9dlTnmzQk2lBdkzA=='; (...)</code></pre>
 				<pre class="fragment">
@@ -272,6 +277,7 @@ nonce="o73WIx9dlTnmzQk2lBdkzA=="/&gt; &lt;!-- ok --&gt;
 
 &lt;script src="https://www.google.com/evil.js"/&gt; &lt;!-- nope --&gt;
 </code></pre>
+
 				<aside class="notes">
 					Noen ord om alternativ tilnærming til script-src og style-src (anti-XSS)
 						Hittil har vi oppgitt hvilke hosts vi vil laste script og styles fra

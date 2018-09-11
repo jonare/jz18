@@ -1,11 +1,11 @@
+<img src=x onerror="alert('Dette er et ondsinnet tredjeparts JS som kunne gjort hva som helst i brukerens nettleser!')"/>
+
+Content-Security-Policy: default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ;	
+
+Content-Security-Policy: default-src 'none' ; script-src 'self' code.jquery.com 'sha256-CGYyHS8cQDmy3OZhb8SAuWNYZA62HZo3+kyZUKP+vmI=' 'sha256-YyqwI4T7AD/UUsOAHEspjPDpFXBMshnIO5L24i2WQ8s='; style-src 'self' 'sha256-j0bVhc2Wj58RJgvcJPevapx5zlVLw6ns6eYzK/hcA04=' 'sha256-j6Tt8qv7z2kSc7fUs0YHbrxawwsQcS05fVaX1r2qrbk=' 'sha256-p4cncjf0hAIeTSS5tXecf7qTUanDC27KdlKhT9eOsZU='; img-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ;
+
 http://localhost:8079/
 http://localhost:8080/
 https://jonare.github.io/jz18
 https://report-uri.com/home/generate
 https://csp-evaluator.withgoogle.com/
-
-<img src=x onerror="alert('Dette er et ondsinnet tredjeparts JS!')"/>
-
-Content-Security-Policy: default-src 'none' ; script-src 'self' ; style-src 'self' ; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ;	
-
-Content-Security-Policy: default-src 'none' ; script-src 'self' code.jquery.com 'sha256-CGYyHS8cQDmy3OZhb8SAuWNYZA62HZo3+kyZUKP+vmI='; style-src 'self' 'sha256-j0bVhc2Wj58RJgvcJPevapx5zlVLw6ns6eYzK/hcA04=' 'sha256-j6Tt8qv7z2kSc7fUs0YHbrxawwsQcS05fVaX1r2qrbk=' 'sha256-p4cncjf0hAIeTSS5tXecf7qTUanDC27KdlKhT9eOsZU='; img-src 'self' ; font-src 'self' ; connect-src 'self' ; object-src 'none' ; frame-src 'none' ; frame-ancestors 'none' ; form-action 'self' ;
